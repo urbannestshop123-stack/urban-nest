@@ -1,0 +1,1071 @@
+<!doctype html>
+<html lang="en" class="h-full">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>UrbanNest - Premium Kitchen &amp; Dining</title>
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
+  <script src="/_sdk/element_sdk.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&amp;family=Plus+Jakarta+Sans:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            display: ['Playfair Display', 'serif'],
+            body: ['Plus Jakarta Sans', 'sans-serif']
+          },
+          colors: {
+            brand: {
+              cream: '#F8F5F0',
+              charcoal: '#2D2D2D',
+              copper: '#B87333',
+              sage: '#8B9A7D',
+              sand: '#E8E0D5'
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    html, body { height: 100%; }
+    .main-wrapper { height: 100%; overflow-y: auto; overflow-x: hidden; }
+    * { scrollbar-width: thin; scrollbar-color: #B87333 #F8F5F0; }
+    *::-webkit-scrollbar { width: 8px; }
+    *::-webkit-scrollbar-track { background: #F8F5F0; }
+    *::-webkit-scrollbar-thumb { background: #B87333; border-radius: 4px; }
+    .product-card:hover .product-image { transform: scale(1.05); }
+    .product-card:hover .quick-add { opacity: 1; transform: translateY(0); }
+    .nav-link::after { content: ''; position: absolute; bottom: -2px; left: 0; width: 0; height: 2px; background: #B87333; transition: width 0.3s; }
+    .nav-link:hover::after { width: 100%; }
+    @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes slideIn { from { opacity: 0; transform: translateX(-20px); } to { opacity: 1; transform: translateX(0); } }
+    .animate-fade-in-up { animation: fadeInUp 0.6s ease-out forwards; }
+    .animate-slide-in { animation: slideIn 0.4s ease-out forwards; }
+    .stagger-1 { animation-delay: 0.1s; }
+    .stagger-2 { animation-delay: 0.2s; }
+    .stagger-3 { animation-delay: 0.3s; }
+    .stagger-4 { animation-delay: 0.4s; }
+  </style>
+  <style>body { box-sizing: border-box; }</style>
+  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+ </head>
+ <body class="h-full bg-brand-cream font-body text-brand-charcoal">
+  <div class="main-wrapper"><!-- Promo Banner -->
+   <div id="promo-banner" class="bg-brand-charcoal text-white text-center py-2.5 px-4 text-sm font-medium tracking-wide"><span id="promo-text">🎉 FREE DELIVERY on orders over AED 200 | Use code: URBAN20 for 20% OFF</span>
+   </div><!-- Header -->
+   <header class="bg-brand-cream/95 backdrop-blur-md sticky top-0 z-50 border-b border-brand-sand">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+     <div class="flex items-center justify-between h-20"><!-- Logo -->
+      <div class="flex items-center gap-3 cursor-pointer" onclick="navigateTo('home')">
+       <div class="relative w-12 h-12">
+        <svg viewbox="0 0 48 48" class="w-full h-full"><rect x="8" y="16" width="32" height="24" rx="2" fill="#B87333" opacity="0.9" /> <rect x="12" y="12" width="24" height="8" rx="1" fill="#2D2D2D" /> <circle cx="18" cy="28" r="3" fill="#F8F5F0" /> <circle cx="30" cy="28" r="3" fill="#F8F5F0" /> <path d="M16 34 L32 34" stroke="#F8F5F0" stroke-width="2" stroke-linecap="round" /> <path d="M6 20 L42 20" stroke="#8B9A7D" stroke-width="2" /> <rect x="20" y="8" width="8" height="4" rx="1" fill="#B87333" />
+        </svg>
+       </div>
+       <div>
+        <h1 id="store-name" class="text-2xl font-display font-bold text-brand-charcoal tracking-tight">UrbanNest</h1>
+        <p id="tagline" class="text-xs text-brand-copper font-medium tracking-widest uppercase">Kitchen &amp; Dining</p>
+       </div>
+      </div><!-- Desktop Navigation -->
+      <nav class="hidden lg:flex items-center gap-8"><a href="#" onclick="navigateTo('home'); return false;" class="nav-link relative text-sm font-semibold text-brand-charcoal hover:text-brand-copper transition-colors">Home</a> <a href="#" onclick="navigateTo('shop'); return false;" class="nav-link relative text-sm font-semibold text-brand-charcoal hover:text-brand-copper transition-colors">Shop All</a> <a href="#" onclick="filterByCategory('appliances'); return false;" class="nav-link relative text-sm font-semibold text-brand-charcoal hover:text-brand-copper transition-colors">Appliances</a> <a href="#" onclick="filterByCategory('accessories'); return false;" class="nav-link relative text-sm font-semibold text-brand-charcoal hover:text-brand-copper transition-colors">Accessories</a> <a href="#" onclick="filterByCategory('dining'); return false;" class="nav-link relative text-sm font-semibold text-brand-charcoal hover:text-brand-copper transition-colors">Dining &amp; Bar</a> <a href="#" onclick="navigateTo('about'); return false;" class="nav-link relative text-sm font-semibold text-brand-charcoal hover:text-brand-copper transition-colors">About</a>
+      </nav><!-- Actions -->
+      <div class="flex items-center gap-4"><button onclick="toggleSearch()" class="p-2 hover:bg-brand-sand rounded-full transition-colors"> <i data-lucide="search" class="w-5 h-5"></i> </button> <button onclick="navigateTo('wishlist')" class="p-2 hover:bg-brand-sand rounded-full transition-colors relative"> <i data-lucide="heart" class="w-5 h-5"></i> <span id="wishlist-count" class="absolute -top-1 -right-1 w-5 h-5 bg-brand-copper text-white text-xs rounded-full flex items-center justify-center font-bold hidden">0</span> </button> <button onclick="navigateTo('cart')" class="p-2 hover:bg-brand-sand rounded-full transition-colors relative"> <i data-lucide="shopping-bag" class="w-5 h-5"></i> <span id="cart-count" class="absolute -top-1 -right-1 w-5 h-5 bg-brand-copper text-white text-xs rounded-full flex items-center justify-center font-bold">0</span> </button> <button onclick="toggleMobileMenu()" class="lg:hidden p-2 hover:bg-brand-sand rounded-full transition-colors"> <i data-lucide="menu" class="w-5 h-5"></i> </button>
+      </div>
+     </div>
+    </div><!-- Search Bar -->
+    <div id="search-bar" class="hidden border-t border-brand-sand">
+     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+      <div class="relative"><input type="text" id="search-input" placeholder="Search for kitchen essentials..." class="w-full px-4 py-3 pl-12 bg-white border border-brand-sand rounded-lg focus:outline-none focus:border-brand-copper transition-colors" oninput="handleSearch(this.value)"> <i data-lucide="search" class="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400"></i>
+      </div>
+     </div>
+    </div><!-- Mobile Menu -->
+    <div id="mobile-menu" class="hidden lg:hidden border-t border-brand-sand bg-brand-cream">
+     <nav class="max-w-7xl mx-auto px-4 py-4 space-y-3"><a href="#" onclick="navigateTo('home'); toggleMobileMenu(); return false;" class="block py-2 text-brand-charcoal font-medium">Home</a> <a href="#" onclick="navigateTo('shop'); toggleMobileMenu(); return false;" class="block py-2 text-brand-charcoal font-medium">Shop All</a> <a href="#" onclick="filterByCategory('appliances'); toggleMobileMenu(); return false;" class="block py-2 text-brand-charcoal font-medium">Appliances</a> <a href="#" onclick="filterByCategory('accessories'); toggleMobileMenu(); return false;" class="block py-2 text-brand-charcoal font-medium">Accessories</a> <a href="#" onclick="filterByCategory('dining'); toggleMobileMenu(); return false;" class="block py-2 text-brand-charcoal font-medium">Dining &amp; Bar</a> <a href="#" onclick="navigateTo('about'); toggleMobileMenu(); return false;" class="block py-2 text-brand-charcoal font-medium">About</a>
+     </nav>
+    </div>
+   </header><!-- Main Content -->
+   <main id="main-content"><!-- Home Page -->
+    <div id="page-home"><!-- Hero Section -->
+     <section class="relative bg-gradient-to-br from-brand-cream via-brand-sand to-brand-cream overflow-hidden">
+      <div class="absolute inset-0 opacity-10">
+       <div class="absolute top-20 left-10 w-72 h-72 bg-brand-copper rounded-full blur-3xl"></div>
+       <div class="absolute bottom-20 right-10 w-96 h-96 bg-brand-sage rounded-full blur-3xl"></div>
+      </div>
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-24">
+       <div class="grid lg:grid-cols-2 gap-12 items-center">
+        <div class="animate-fade-in-up"><span class="inline-block px-4 py-1.5 bg-brand-copper/10 text-brand-copper text-sm font-semibold rounded-full mb-6">New Collection 2024</span>
+         <h2 id="hero-title" class="text-4xl sm:text-5xl lg:text-6xl font-display font-bold text-brand-charcoal leading-tight mb-6">Elevate Your<br><span class="text-brand-copper">Culinary Space</span></h2>
+         <p id="hero-subtitle" class="text-lg text-gray-600 mb-8 max-w-lg">Discover premium kitchen essentials crafted for the modern UAE home. From artisan cookware to elegant dining sets.</p>
+         <div class="flex flex-wrap gap-4"><button onclick="navigateTo('shop')" class="px-8 py-4 bg-brand-charcoal text-white font-semibold rounded-lg hover:bg-brand-copper transition-all duration-300 transform hover:scale-105 shadow-lg"> Shop Now </button> <button onclick="filterByCategory('new')" class="px-8 py-4 bg-white text-brand-charcoal font-semibold rounded-lg border-2 border-brand-charcoal hover:bg-brand-charcoal hover:text-white transition-all duration-300"> New Arrivals </button>
+         </div>
+         <div class="flex items-center gap-8 mt-10">
+          <div>
+           <p class="text-3xl font-bold text-brand-charcoal">500+</p>
+           <p class="text-sm text-gray-500">Products</p>
+          </div>
+          <div class="w-px h-12 bg-brand-sand"></div>
+          <div>
+           <p class="text-3xl font-bold text-brand-charcoal">50K+</p>
+           <p class="text-sm text-gray-500">Happy Customers</p>
+          </div>
+          <div class="w-px h-12 bg-brand-sand"></div>
+          <div>
+           <p class="text-3xl font-bold text-brand-charcoal">4.9</p>
+           <p class="text-sm text-gray-500">Rating</p>
+          </div>
+         </div>
+        </div>
+        <div class="relative animate-fade-in-up stagger-2">
+         <div class="relative bg-white rounded-3xl shadow-2xl p-8 transform rotate-3 hover:rotate-0 transition-transform duration-500">
+          <svg viewbox="0 0 400 300" class="w-full"><!-- Kitchen Scene --> <rect x="50" y="100" width="300" height="150" rx="8" fill="#E8E0D5" /> <rect x="70" y="120" width="80" height="60" rx="4" fill="#B87333" /> <rect x="80" y="130" width="60" height="40" rx="2" fill="#2D2D2D" opacity="0.8" /> <circle cx="110" cy="150" r="10" fill="#F8F5F0" /> <!-- Pot --> <ellipse cx="220" cy="160" rx="45" ry="20" fill="#8B9A7D" /> <rect x="175" y="140" width="90" height="20" fill="#8B9A7D" /> <ellipse cx="220" cy="140" rx="45" ry="15" fill="#9AAD8D" /> <rect x="165" y="130" width="10" height="30" rx="2" fill="#2D2D2D" /> <rect x="275" y="130" width="10" height="30" rx="2" fill="#2D2D2D" /> <!-- Steam --> <path d="M200 120 Q205 100 200 80" stroke="#E8E0D5" stroke-width="3" fill="none" opacity="0.6" /> <path d="M220 115 Q225 95 220 75" stroke="#E8E0D5" stroke-width="3" fill="none" opacity="0.6" /> <path d="M240 120 Q245 100 240 80" stroke="#E8E0D5" stroke-width="3" fill="none" opacity="0.6" /> <!-- Utensils --> <rect x="310" y="100" width="6" height="80" rx="2" fill="#B87333" /> <rect x="320" y="100" width="6" height="80" rx="2" fill="#B87333" /> <ellipse cx="313" cy="95" rx="8" ry="12" fill="#B87333" /> <ellipse cx="323" cy="95" rx="8" ry="12" fill="#B87333" /> <!-- Decorative elements --> <circle cx="80" cy="80" r="20" fill="#B87333" opacity="0.2" /> <circle cx="350" cy="220" r="30" fill="#8B9A7D" opacity="0.2" />
+          </svg>
+         </div>
+         <div class="absolute -bottom-4 -left-4 bg-brand-copper text-white px-6 py-3 rounded-lg shadow-lg">
+          <p class="text-sm font-bold">Up to 40% OFF</p>
+          <p class="text-xs opacity-80">This Weekend</p>
+         </div>
+        </div>
+       </div>
+      </div>
+     </section><!-- Categories -->
+     <section class="py-16 bg-white">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+       <div class="text-center mb-12">
+        <h3 class="text-3xl font-display font-bold text-brand-charcoal mb-4">Shop by Category</h3>
+        <p class="text-gray-600">Find exactly what you need for your kitchen</p>
+       </div>
+       <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+        <div onclick="filterByCategory('appliances')" class="group cursor-pointer">
+         <div class="bg-gradient-to-br from-brand-sand to-brand-cream rounded-2xl p-8 text-center transform transition-all duration-300 group-hover:scale-105 group-hover:shadow-xl">
+          <div class="w-20 h-20 mx-auto mb-4 bg-brand-copper/10 rounded-full flex items-center justify-center group-hover:bg-brand-copper/20 transition-colors">
+           <svg viewbox="0 0 48 48" class="w-10 h-10"><rect x="12" y="8" width="24" height="32" rx="3" fill="#B87333" /> <rect x="16" y="12" width="16" height="12" rx="2" fill="#F8F5F0" /> <circle cx="24" cy="32" r="4" fill="#2D2D2D" />
+           </svg>
+          </div>
+          <h4 class="font-semibold text-brand-charcoal mb-1">Appliances</h4>
+          <p class="text-sm text-gray-500">45 Products</p>
+         </div>
+        </div>
+        <div onclick="filterByCategory('accessories')" class="group cursor-pointer">
+         <div class="bg-gradient-to-br from-brand-sand to-brand-cream rounded-2xl p-8 text-center transform transition-all duration-300 group-hover:scale-105 group-hover:shadow-xl">
+          <div class="w-20 h-20 mx-auto mb-4 bg-brand-sage/10 rounded-full flex items-center justify-center group-hover:bg-brand-sage/20 transition-colors">
+           <svg viewbox="0 0 48 48" class="w-10 h-10"><path d="M24 8 L24 20" stroke="#8B9A7D" stroke-width="3" stroke-linecap="round" /> <ellipse cx="24" cy="28" rx="12" ry="6" fill="#8B9A7D" /> <path d="M12 28 Q12 40 24 40 Q36 40 36 28" fill="#8B9A7D" />
+           </svg>
+          </div>
+          <h4 class="font-semibold text-brand-charcoal mb-1">Accessories</h4>
+          <p class="text-sm text-gray-500">68 Products</p>
+         </div>
+        </div>
+        <div onclick="filterByCategory('dining')" class="group cursor-pointer">
+         <div class="bg-gradient-to-br from-brand-sand to-brand-cream rounded-2xl p-8 text-center transform transition-all duration-300 group-hover:scale-105 group-hover:shadow-xl">
+          <div class="w-20 h-20 mx-auto mb-4 bg-brand-copper/10 rounded-full flex items-center justify-center group-hover:bg-brand-copper/20 transition-colors">
+           <svg viewbox="0 0 48 48" class="w-10 h-10"><ellipse cx="24" cy="30" rx="16" ry="8" fill="#B87333" /> <ellipse cx="24" cy="28" rx="14" ry="6" fill="#F8F5F0" /> <circle cx="20" cy="26" r="3" fill="#8B9A7D" /> <circle cx="28" cy="28" r="2" fill="#E8E0D5" />
+           </svg>
+          </div>
+          <h4 class="font-semibold text-brand-charcoal mb-1">Dining &amp; Bar</h4>
+          <p class="text-sm text-gray-500">52 Products</p>
+         </div>
+        </div>
+        <div onclick="filterByCategory('cookware')" class="group cursor-pointer">
+         <div class="bg-gradient-to-br from-brand-sand to-brand-cream rounded-2xl p-8 text-center transform transition-all duration-300 group-hover:scale-105 group-hover:shadow-xl">
+          <div class="w-20 h-20 mx-auto mb-4 bg-brand-charcoal/10 rounded-full flex items-center justify-center group-hover:bg-brand-charcoal/20 transition-colors">
+           <svg viewbox="0 0 48 48" class="w-10 h-10"><ellipse cx="24" cy="32" rx="14" ry="6" fill="#2D2D2D" /> <rect x="10" y="20" width="28" height="12" fill="#2D2D2D" /> <ellipse cx="24" cy="20" rx="14" ry="5" fill="#3D3D3D" /> <rect x="38" y="24" width="8" height="4" rx="2" fill="#2D2D2D" />
+           </svg>
+          </div>
+          <h4 class="font-semibold text-brand-charcoal mb-1">Cookware</h4>
+          <p class="text-sm text-gray-500">38 Products</p>
+         </div>
+        </div>
+       </div>
+      </div>
+     </section><!-- Featured Products -->
+     <section class="py-16 bg-brand-cream">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+       <div class="flex items-center justify-between mb-12">
+        <div>
+         <h3 class="text-3xl font-display font-bold text-brand-charcoal mb-2">Featured Products</h3>
+         <p class="text-gray-600">Handpicked favorites for your kitchen</p>
+        </div><button onclick="navigateTo('shop')" class="hidden sm:flex items-center gap-2 text-brand-copper font-semibold hover:gap-3 transition-all"> View All <i data-lucide="arrow-right" class="w-5 h-5"></i> </button>
+       </div>
+       <div id="featured-products" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6"><!-- Products will be rendered here -->
+       </div>
+      </div>
+     </section><!-- Banner -->
+     <section class="py-16 bg-brand-charcoal">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+       <div class="grid md:grid-cols-2 gap-12 items-center">
+        <div><span class="text-brand-copper font-semibold text-sm tracking-widest uppercase mb-4 block">Limited Time Offer</span>
+         <h3 class="text-4xl font-display font-bold text-white mb-6">Kitchen Essentials<br>
+          Bundle Sale</h3>
+         <p class="text-gray-300 mb-8">Get everything you need to start your culinary journey. Premium cookware, utensils, and accessories in one complete set.</p>
+         <div class="flex items-center gap-6 mb-8">
+          <div class="text-center">
+           <p class="text-4xl font-bold text-brand-copper" id="countdown-days">03</p>
+           <p class="text-xs text-gray-400 uppercase">Days</p>
+          </div>
+          <div class="text-2xl text-gray-500">
+           :
+          </div>
+          <div class="text-center">
+           <p class="text-4xl font-bold text-brand-copper" id="countdown-hours">12</p>
+           <p class="text-xs text-gray-400 uppercase">Hours</p>
+          </div>
+          <div class="text-2xl text-gray-500">
+           :
+          </div>
+          <div class="text-center">
+           <p class="text-4xl font-bold text-brand-copper" id="countdown-mins">45</p>
+           <p class="text-xs text-gray-400 uppercase">Mins</p>
+          </div>
+          <div class="text-2xl text-gray-500">
+           :
+          </div>
+          <div class="text-center">
+           <p class="text-4xl font-bold text-brand-copper" id="countdown-secs">00</p>
+           <p class="text-xs text-gray-400 uppercase">Secs</p>
+          </div>
+         </div><button onclick="navigateTo('shop')" class="px-8 py-4 bg-brand-copper text-white font-semibold rounded-lg hover:bg-brand-copper/90 transition-colors"> Shop the Sale </button>
+        </div>
+        <div class="relative">
+         <div class="bg-brand-sand/10 rounded-3xl p-8">
+          <svg viewbox="0 0 400 300" class="w-full"><!-- Bundle illustration --> <rect x="80" y="120" width="100" height="80" rx="4" fill="#B87333" /> <ellipse cx="130" cy="120" rx="50" ry="15" fill="#C98343" /> <rect x="200" y="100" width="60" height="100" rx="4" fill="#8B9A7D" /> <ellipse cx="230" cy="100" rx="30" ry="10" fill="#9AAD8D" /> <rect x="280" y="140" width="70" height="60" rx="4" fill="#2D2D2D" /> <rect x="290" y="150" width="50" height="35" rx="2" fill="#F8F5F0" /> <circle cx="100" cy="80" r="25" fill="#B87333" opacity="0.3" /> <circle cx="320" cy="220" r="35" fill="#8B9A7D" opacity="0.3" />
+          </svg>
+         </div>
+         <div class="absolute top-4 right-4 bg-white text-brand-charcoal px-4 py-2 rounded-full font-bold shadow-lg">
+          Save 40%
+         </div>
+        </div>
+       </div>
+      </div>
+     </section><!-- Testimonials -->
+     <section class="py-16 bg-white">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+       <div class="text-center mb-12">
+        <h3 class="text-3xl font-display font-bold text-brand-charcoal mb-4">What Our Customers Say</h3>
+        <p class="text-gray-600">Join thousands of happy customers across the UAE</p>
+       </div>
+       <div class="grid md:grid-cols-3 gap-8">
+        <div class="bg-brand-cream rounded-2xl p-8">
+         <div class="flex gap-1 mb-4"><i data-lucide="star" class="w-5 h-5 text-yellow-400 fill-yellow-400"></i> <i data-lucide="star" class="w-5 h-5 text-yellow-400 fill-yellow-400"></i> <i data-lucide="star" class="w-5 h-5 text-yellow-400 fill-yellow-400"></i> <i data-lucide="star" class="w-5 h-5 text-yellow-400 fill-yellow-400"></i> <i data-lucide="star" class="w-5 h-5 text-yellow-400 fill-yellow-400"></i>
+         </div>
+         <p class="text-gray-600 mb-6">"The quality of products from UrbanNest is exceptional. My kitchen has never looked better. Fast delivery to Dubai!"</p>
+         <div class="flex items-center gap-3">
+          <div class="w-12 h-12 bg-brand-copper rounded-full flex items-center justify-center text-white font-bold">
+           FA
+          </div>
+          <div>
+           <p class="font-semibold text-brand-charcoal">Fatima Al-Rashid</p>
+           <p class="text-sm text-gray-500">Dubai, UAE</p>
+          </div>
+         </div>
+        </div>
+        <div class="bg-brand-cream rounded-2xl p-8">
+         <div class="flex gap-1 mb-4"><i data-lucide="star" class="w-5 h-5 text-yellow-400 fill-yellow-400"></i> <i data-lucide="star" class="w-5 h-5 text-yellow-400 fill-yellow-400"></i> <i data-lucide="star" class="w-5 h-5 text-yellow-400 fill-yellow-400"></i> <i data-lucide="star" class="w-5 h-5 text-yellow-400 fill-yellow-400"></i> <i data-lucide="star" class="w-5 h-5 text-yellow-400 fill-yellow-400"></i>
+         </div>
+         <p class="text-gray-600 mb-6">"Best online kitchen store in the UAE! The copper cookware set is absolutely stunning. Customer service is top-notch."</p>
+         <div class="flex items-center gap-3">
+          <div class="w-12 h-12 bg-brand-sage rounded-full flex items-center justify-center text-white font-bold">
+           MK
+          </div>
+          <div>
+           <p class="font-semibold text-brand-charcoal">Mohammed Khan</p>
+           <p class="text-sm text-gray-500">Abu Dhabi, UAE</p>
+          </div>
+         </div>
+        </div>
+        <div class="bg-brand-cream rounded-2xl p-8">
+         <div class="flex gap-1 mb-4"><i data-lucide="star" class="w-5 h-5 text-yellow-400 fill-yellow-400"></i> <i data-lucide="star" class="w-5 h-5 text-yellow-400 fill-yellow-400"></i> <i data-lucide="star" class="w-5 h-5 text-yellow-400 fill-yellow-400"></i> <i data-lucide="star" class="w-5 h-5 text-yellow-400 fill-yellow-400"></i> <i data-lucide="star" class="w-5 h-5 text-yellow-400 fill-yellow-400"></i>
+         </div>
+         <p class="text-gray-600 mb-6">"Love the minimalist designs! Everything I ordered exceeded my expectations. Will definitely shop here again."</p>
+         <div class="flex items-center gap-3">
+          <div class="w-12 h-12 bg-brand-charcoal rounded-full flex items-center justify-center text-white font-bold">
+           SA
+          </div>
+          <div>
+           <p class="font-semibold text-brand-charcoal">Sara Ahmed</p>
+           <p class="text-sm text-gray-500">Sharjah, UAE</p>
+          </div>
+         </div>
+        </div>
+       </div>
+      </div>
+     </section><!-- Features -->
+     <section class="py-16 bg-brand-sand/30">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+       <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+        <div class="text-center">
+         <div class="w-16 h-16 mx-auto mb-4 bg-white rounded-full flex items-center justify-center shadow-md"><i data-lucide="truck" class="w-7 h-7 text-brand-copper"></i>
+         </div>
+         <h4 class="font-semibold text-brand-charcoal mb-1">Free Delivery</h4>
+         <p class="text-sm text-gray-500">On orders over AED 200</p>
+        </div>
+        <div class="text-center">
+         <div class="w-16 h-16 mx-auto mb-4 bg-white rounded-full flex items-center justify-center shadow-md"><i data-lucide="shield-check" class="w-7 h-7 text-brand-copper"></i>
+         </div>
+         <h4 class="font-semibold text-brand-charcoal mb-1">Secure Payment</h4>
+         <p class="text-sm text-gray-500">100% secure checkout</p>
+        </div>
+        <div class="text-center">
+         <div class="w-16 h-16 mx-auto mb-4 bg-white rounded-full flex items-center justify-center shadow-md"><i data-lucide="refresh-cw" class="w-7 h-7 text-brand-copper"></i>
+         </div>
+         <h4 class="font-semibold text-brand-charcoal mb-1">Easy Returns</h4>
+         <p class="text-sm text-gray-500">30-day return policy</p>
+        </div>
+        <div class="text-center">
+         <div class="w-16 h-16 mx-auto mb-4 bg-white rounded-full flex items-center justify-center shadow-md"><i data-lucide="headphones" class="w-7 h-7 text-brand-copper"></i>
+         </div>
+         <h4 class="font-semibold text-brand-charcoal mb-1">24/7 Support</h4>
+         <p class="text-sm text-gray-500">Dedicated support team</p>
+        </div>
+       </div>
+      </div>
+     </section>
+    </div><!-- Shop Page -->
+    <div id="page-shop" class="hidden py-12">
+     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-8">
+       <div>
+        <h2 class="text-3xl font-display font-bold text-brand-charcoal" id="shop-title">All Products</h2>
+        <p class="text-gray-600" id="product-count">Showing all products</p>
+       </div>
+       <div class="flex items-center gap-4"><select id="sort-select" onchange="sortProducts(this.value)" class="px-4 py-2 bg-white border border-brand-sand rounded-lg focus:outline-none focus:border-brand-copper"> <option value="featured">Featured</option> <option value="price-low">Price: Low to High</option> <option value="price-high">Price: High to Low</option> <option value="newest">Newest First</option> </select>
+       </div>
+      </div>
+      <div class="flex flex-wrap gap-2 mb-8"><button onclick="filterByCategory('all')" class="category-btn px-4 py-2 rounded-full text-sm font-medium transition-colors bg-brand-charcoal text-white" data-category="all">All</button> <button onclick="filterByCategory('appliances')" class="category-btn px-4 py-2 rounded-full text-sm font-medium transition-colors bg-white text-brand-charcoal border border-brand-sand hover:border-brand-copper" data-category="appliances">Appliances</button> <button onclick="filterByCategory('accessories')" class="category-btn px-4 py-2 rounded-full text-sm font-medium transition-colors bg-white text-brand-charcoal border border-brand-sand hover:border-brand-copper" data-category="accessories">Accessories</button> <button onclick="filterByCategory('dining')" class="category-btn px-4 py-2 rounded-full text-sm font-medium transition-colors bg-white text-brand-charcoal border border-brand-sand hover:border-brand-copper" data-category="dining">Dining &amp; Bar</button> <button onclick="filterByCategory('cookware')" class="category-btn px-4 py-2 rounded-full text-sm font-medium transition-colors bg-white text-brand-charcoal border border-brand-sand hover:border-brand-copper" data-category="cookware">Cookware</button> <button onclick="filterByCategory('new')" class="category-btn px-4 py-2 rounded-full text-sm font-medium transition-colors bg-white text-brand-charcoal border border-brand-sand hover:border-brand-copper" data-category="new">New Arrivals</button>
+      </div>
+      <div id="shop-products" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6"><!-- Products will be rendered here -->
+      </div>
+     </div>
+    </div><!-- Product Detail Page -->
+    <div id="page-product" class="hidden py-12">
+     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"><button onclick="navigateTo('shop')" class="flex items-center gap-2 text-gray-600 hover:text-brand-copper mb-8 transition-colors"> <i data-lucide="arrow-left" class="w-5 h-5"></i> Back to Shop </button>
+      <div id="product-detail-content"><!-- Product details will be rendered here -->
+      </div>
+     </div>
+    </div><!-- Cart Page -->
+    <div id="page-cart" class="hidden py-12">
+     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-display font-bold text-brand-charcoal mb-8">Shopping Cart</h2>
+      <div id="cart-content"><!-- Cart items will be rendered here -->
+      </div>
+     </div>
+    </div><!-- Wishlist Page -->
+    <div id="page-wishlist" class="hidden py-12">
+     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-display font-bold text-brand-charcoal mb-8">My Wishlist</h2>
+      <div id="wishlist-content"><!-- Wishlist items will be rendered here -->
+      </div>
+     </div>
+    </div><!-- About Page -->
+    <div id="page-about" class="hidden py-12">
+     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+       <h2 class="text-4xl font-display font-bold text-brand-charcoal mb-4">About UrbanNest</h2>
+       <p class="text-xl text-gray-600">Your premier destination for kitchen excellence in the UAE</p>
+      </div>
+      <div class="prose prose-lg max-w-none">
+       <div class="bg-white rounded-2xl p-8 shadow-sm mb-8">
+        <h3 class="text-2xl font-display font-bold text-brand-charcoal mb-4">Our Story</h3>
+        <p class="text-gray-600 mb-4">Founded in Dubai in 2020, UrbanNest was born from a passion for bringing world-class kitchen products to the UAE market. We believe that the kitchen is the heart of every home, and we're committed to helping you create a space that inspires culinary creativity.</p>
+        <p class="text-gray-600">Our curated collection features premium kitchen appliances, elegant accessories, and beautiful dining essentials sourced from the finest manufacturers worldwide. Every product in our store is carefully selected to meet our high standards of quality, design, and functionality.</p>
+       </div>
+       <div class="grid md:grid-cols-3 gap-6">
+        <div class="bg-brand-sand/30 rounded-2xl p-6 text-center">
+         <div class="w-16 h-16 mx-auto mb-4 bg-brand-copper rounded-full flex items-center justify-center"><i data-lucide="award" class="w-8 h-8 text-white"></i>
+         </div>
+         <h4 class="font-bold text-brand-charcoal mb-2">Premium Quality</h4>
+         <p class="text-sm text-gray-600">Only the finest products from trusted brands</p>
+        </div>
+        <div class="bg-brand-sand/30 rounded-2xl p-6 text-center">
+         <div class="w-16 h-16 mx-auto mb-4 bg-brand-sage rounded-full flex items-center justify-center"><i data-lucide="leaf" class="w-8 h-8 text-white"></i>
+         </div>
+         <h4 class="font-bold text-brand-charcoal mb-2">Sustainable</h4>
+         <p class="text-sm text-gray-600">Eco-friendly packaging and practices</p>
+        </div>
+        <div class="bg-brand-sand/30 rounded-2xl p-6 text-center">
+         <div class="w-16 h-16 mx-auto mb-4 bg-brand-charcoal rounded-full flex items-center justify-center"><i data-lucide="heart" class="w-8 h-8 text-white"></i>
+         </div>
+         <h4 class="font-bold text-brand-charcoal mb-2">Customer First</h4>
+         <p class="text-sm text-gray-600">Dedicated to your satisfaction</p>
+        </div>
+       </div>
+      </div>
+     </div>
+    </div>
+   </main><!-- Footer -->
+   <footer class="bg-brand-charcoal text-white py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+     <div class="grid grid-cols-2 md:grid-cols-4 gap-8 mb-12">
+      <div class="col-span-2 md:col-span-1">
+       <div class="flex items-center gap-3 mb-4">
+        <div class="w-10 h-10">
+         <svg viewbox="0 0 48 48" class="w-full h-full"><rect x="8" y="16" width="32" height="24" rx="2" fill="#B87333" /> <rect x="12" y="12" width="24" height="8" rx="1" fill="#F8F5F0" /> <circle cx="18" cy="28" r="3" fill="#F8F5F0" /> <circle cx="30" cy="28" r="3" fill="#F8F5F0" />
+         </svg>
+        </div><span class="text-xl font-display font-bold">UrbanNest</span>
+       </div>
+       <p class="text-gray-400 text-sm mb-4">Premium kitchen &amp; dining essentials for the modern UAE home.</p>
+       <div class="flex gap-3"><a href="#" class="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-brand-copper transition-colors"> <i data-lucide="instagram" class="w-5 h-5"></i> </a> <a href="#" class="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-brand-copper transition-colors"> <i data-lucide="facebook" class="w-5 h-5"></i> </a> <a href="#" class="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-brand-copper transition-colors"> <i data-lucide="twitter" class="w-5 h-5"></i> </a>
+       </div>
+      </div>
+      <div>
+       <h4 class="font-semibold mb-4">Shop</h4>
+       <ul class="space-y-2 text-sm text-gray-400">
+        <li><a href="#" onclick="filterByCategory('all'); return false;" class="hover:text-brand-copper transition-colors">All Products</a></li>
+        <li><a href="#" onclick="filterByCategory('appliances'); return false;" class="hover:text-brand-copper transition-colors">Appliances</a></li>
+        <li><a href="#" onclick="filterByCategory('accessories'); return false;" class="hover:text-brand-copper transition-colors">Accessories</a></li>
+        <li><a href="#" onclick="filterByCategory('dining'); return false;" class="hover:text-brand-copper transition-colors">Dining &amp; Bar</a></li>
+        <li><a href="#" onclick="filterByCategory('new'); return false;" class="hover:text-brand-copper transition-colors">New Arrivals</a></li>
+       </ul>
+      </div>
+      <div>
+       <h4 class="font-semibold mb-4">Support</h4>
+       <ul class="space-y-2 text-sm text-gray-400">
+        <li><a href="#" class="hover:text-brand-copper transition-colors">Contact Us</a></li>
+        <li><a href="#" class="hover:text-brand-copper transition-colors">FAQs</a></li>
+        <li><a href="#" class="hover:text-brand-copper transition-colors">Shipping Info</a></li>
+        <li><a href="#" class="hover:text-brand-copper transition-colors">Returns</a></li>
+        <li><a href="#" class="hover:text-brand-copper transition-colors">Track Order</a></li>
+       </ul>
+      </div>
+      <div>
+       <h4 class="font-semibold mb-4">Contact</h4>
+       <ul class="space-y-2 text-sm text-gray-400">
+        <li class="flex items-center gap-2"><i data-lucide="map-pin" class="w-4 h-4 text-brand-copper"></i> Dubai, UAE</li>
+        <li class="flex items-center gap-2"><i data-lucide="phone" class="w-4 h-4 text-brand-copper"></i> +971 4 123 4567</li>
+        <li class="flex items-center gap-2"><i data-lucide="mail" class="w-4 h-4 text-brand-copper"></i> hello@urbannest.ae</li>
+       </ul>
+      </div>
+     </div>
+     <div class="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+      <p class="text-sm text-gray-400">© 2024 UrbanNest. All rights reserved.</p>
+      <div class="flex items-center gap-4"><span class="text-sm text-gray-400">We accept:</span>
+       <div class="flex gap-2">
+        <div class="w-10 h-6 bg-white/10 rounded flex items-center justify-center text-xs font-bold">
+         VISA
+        </div>
+        <div class="w-10 h-6 bg-white/10 rounded flex items-center justify-center text-xs font-bold">
+         MC
+        </div>
+        <div class="w-10 h-6 bg-white/10 rounded flex items-center justify-center text-xs font-bold">
+         AMEX
+        </div>
+        <div class="w-10 h-6 bg-white/10 rounded flex items-center justify-center text-xs font-bold">
+         COD
+        </div>
+       </div>
+      </div>
+     </div>
+    </div>
+   </footer><!-- Toast Notification -->
+   <div id="toast" class="fixed bottom-4 right-4 bg-brand-charcoal text-white px-6 py-3 rounded-lg shadow-xl transform translate-y-20 opacity-0 transition-all duration-300 z-50"><span id="toast-message"></span>
+   </div>
+  </div>
+  <script>
+    // Default configuration
+    const defaultConfig = {
+      store_name: 'UrbanNest',
+      tagline: 'Kitchen & Dining',
+      hero_title: 'Elevate Your Culinary Space',
+      hero_subtitle: 'Discover premium kitchen essentials crafted for the modern UAE home. From artisan cookware to elegant dining sets.',
+      promo_text: '🎉 FREE DELIVERY on orders over AED 200 | Use code: URBAN20 for 20% OFF',
+      background_color: '#F8F5F0',
+      surface_color: '#FFFFFF',
+      text_color: '#2D2D2D',
+      primary_action_color: '#B87333',
+      secondary_action_color: '#8B9A7D',
+      font_family: 'Plus Jakarta Sans',
+      font_size: 16
+    };
+
+    // Product data
+    const products = [
+      { id: 1, name: 'Premium Copper Cookware Set', price: 1299, originalPrice: 1599, category: 'cookware', badge: 'Best Seller', rating: 4.9, reviews: 128, isNew: false, icon: 'pot' },
+      { id: 2, name: 'Smart Air Fryer Pro', price: 549, originalPrice: 699, category: 'appliances', badge: 'Sale', rating: 4.8, reviews: 256, isNew: false, icon: 'airfryer' },
+      { id: 3, name: 'Artisan Knife Collection', price: 899, originalPrice: null, category: 'accessories', badge: null, rating: 5.0, reviews: 89, isNew: true, icon: 'knife' },
+      { id: 4, name: 'Marble Dining Set (6pc)', price: 1899, originalPrice: 2299, category: 'dining', badge: 'Sale', rating: 4.7, reviews: 45, isNew: false, icon: 'plate' },
+      { id: 5, name: 'Espresso Machine Deluxe', price: 2499, originalPrice: null, category: 'appliances', badge: 'Premium', rating: 4.9, reviews: 167, isNew: false, icon: 'coffee' },
+      { id: 6, name: 'Bamboo Utensil Organizer', price: 149, originalPrice: 199, category: 'accessories', badge: 'Eco', rating: 4.6, reviews: 312, isNew: false, icon: 'utensils' },
+      { id: 7, name: 'Crystal Wine Glass Set', price: 399, originalPrice: null, category: 'dining', badge: null, rating: 4.8, reviews: 78, isNew: true, icon: 'wine' },
+      { id: 8, name: 'Digital Kitchen Scale', price: 89, originalPrice: 129, category: 'accessories', badge: 'Sale', rating: 4.5, reviews: 423, isNew: false, icon: 'scale' },
+      { id: 9, name: 'Cast Iron Dutch Oven', price: 449, originalPrice: null, category: 'cookware', badge: 'Chef\'s Pick', rating: 4.9, reviews: 198, isNew: false, icon: 'dutch' },
+      { id: 10, name: 'Stainless Steel Mixing Bowls', price: 199, originalPrice: 249, category: 'accessories', badge: null, rating: 4.7, reviews: 156, isNew: false, icon: 'bowl' },
+      { id: 11, name: 'Smart Blender 1200W', price: 699, originalPrice: 899, category: 'appliances', badge: 'New', rating: 4.8, reviews: 87, isNew: true, icon: 'blender' },
+      { id: 12, name: 'Japanese Tea Set', price: 349, originalPrice: null, category: 'dining', badge: 'Artisan', rating: 5.0, reviews: 34, isNew: true, icon: 'tea' },
+      { id: 13, name: 'Non-Stick Frying Pan Set', price: 299, originalPrice: 399, category: 'cookware', badge: 'Sale', rating: 4.6, reviews: 267, isNew: false, icon: 'pan' },
+      { id: 14, name: 'Electric Kettle Rose Gold', price: 179, originalPrice: null, category: 'appliances', badge: null, rating: 4.7, reviews: 189, isNew: false, icon: 'kettle' },
+      { id: 15, name: 'Ceramic Dinnerware (12pc)', price: 599, originalPrice: 749, category: 'dining', badge: 'Popular', rating: 4.8, reviews: 145, isNew: false, icon: 'dinner' },
+      { id: 16, name: 'Silicone Baking Mat Set', price: 79, originalPrice: null, category: 'accessories', badge: null, rating: 4.5, reviews: 534, isNew: false, icon: 'mat' },
+      { id: 17, name: 'Food Processor 1000W', price: 799, originalPrice: 999, category: 'appliances', badge: 'Sale', rating: 4.7, reviews: 112, isNew: false, icon: 'processor' },
+      { id: 18, name: 'Cocktail Shaker Kit', price: 249, originalPrice: null, category: 'dining', badge: 'Bar', rating: 4.9, reviews: 67, isNew: true, icon: 'shaker' },
+      { id: 19, name: 'Herb Garden Planter', price: 129, originalPrice: 169, category: 'accessories', badge: 'Eco', rating: 4.4, reviews: 89, isNew: false, icon: 'plant' },
+      { id: 20, name: 'Pressure Cooker 6L', price: 549, originalPrice: null, category: 'appliances', badge: null, rating: 4.8, reviews: 234, isNew: false, icon: 'pressure' }
+    ];
+
+    // State
+    let cart = [];
+    let wishlist = [];
+    let currentCategory = 'all';
+    let currentSort = 'featured';
+    let currentProductId = null;
+
+    // Product icon SVGs
+    function getProductIcon(iconType) {
+      const icons = {
+        pot: `<svg viewBox="0 0 100 100" class="w-full h-full"><ellipse cx="50" cy="60" rx="35" ry="15" fill="#B87333"/><rect x="15" y="35" width="70" height="25" fill="#B87333"/><ellipse cx="50" cy="35" rx="35" ry="12" fill="#C98343"/><rect x="5" y="42" width="12" height="8" rx="2" fill="#2D2D2D"/><rect x="83" y="42" width="12" height="8" rx="2" fill="#2D2D2D"/><path d="M35 25 Q40 15 35 5" stroke="#E8E0D5" stroke-width="3" fill="none" opacity="0.5"/><path d="M50 22 Q55 12 50 2" stroke="#E8E0D5" stroke-width="3" fill="none" opacity="0.5"/><path d="M65 25 Q70 15 65 5" stroke="#E8E0D5" stroke-width="3" fill="none" opacity="0.5"/></svg>`,
+        airfryer: `<svg viewBox="0 0 100 100" class="w-full h-full"><rect x="20" y="15" width="60" height="70" rx="8" fill="#2D2D2D"/><rect x="28" y="25" width="44" height="35" rx="4" fill="#3D3D3D"/><circle cx="50" cy="42" r="12" fill="#B87333" opacity="0.3"/><rect x="35" y="68" width="30" height="8" rx="2" fill="#B87333"/><circle cx="70" cy="75" r="3" fill="#8B9A7D"/></svg>`,
+        knife: `<svg viewBox="0 0 100 100" class="w-full h-full"><path d="M25 80 L75 20 L80 25 L30 85 Z" fill="#E8E0D5"/><path d="M25 80 L75 20 L78 23 L28 83 Z" fill="#C0C0C0"/><rect x="20" y="75" width="15" height="20" rx="2" fill="#8B9A7D"/><rect x="22" y="77" width="11" height="16" rx="1" fill="#7A8A6D"/></svg>`,
+        plate: `<svg viewBox="0 0 100 100" class="w-full h-full"><ellipse cx="50" cy="55" rx="40" ry="18" fill="#E8E0D5"/><ellipse cx="50" cy="52" rx="35" ry="14" fill="#F8F5F0"/><ellipse cx="50" cy="50" rx="25" ry="10" fill="#E8E0D5"/><circle cx="45" cy="48" r="5" fill="#8B9A7D"/><circle cx="55" cy="50" r="3" fill="#B87333"/></svg>`,
+        coffee: `<svg viewBox="0 0 100 100" class="w-full h-full"><rect x="20" y="25" width="45" height="55" rx="4" fill="#2D2D2D"/><rect x="25" y="30" width="35" height="20" rx="2" fill="#3D3D3D"/><rect x="65" y="35" width="15" height="35" rx="2" fill="#2D2D2D"/><ellipse cx="42" cy="70" rx="12" ry="3" fill="#B87333"/><path d="M30 20 Q35 10 30 5" stroke="#E8E0D5" stroke-width="2" fill="none" opacity="0.5"/><path d="M42 18 Q47 8 42 3" stroke="#E8E0D5" stroke-width="2" fill="none" opacity="0.5"/></svg>`,
+        utensils: `<svg viewBox="0 0 100 100" class="w-full h-full"><rect x="15" y="20" width="70" height="60" rx="4" fill="#8B9A7D"/><rect x="25" y="30" width="8" height="40" rx="2" fill="#B87333"/><rect x="38" y="30" width="8" height="40" rx="2" fill="#B87333"/><rect x="51" y="30" width="8" height="40" rx="2" fill="#B87333"/><rect x="64" y="30" width="8" height="40" rx="2" fill="#B87333"/></svg>`,
+        wine: `<svg viewBox="0 0 100 100" class="w-full h-full"><ellipse cx="50" cy="35" rx="20" ry="25" fill="#F8F5F0" opacity="0.9"/><rect x="47" y="55" width="6" height="25" fill="#F8F5F0"/><ellipse cx="50" cy="85" rx="15" ry="5" fill="#F8F5F0"/><ellipse cx="50" cy="40" rx="12" ry="10" fill="#8B4557" opacity="0.4"/></svg>`,
+        scale: `<svg viewBox="0 0 100 100" class="w-full h-full"><rect x="15" y="50" width="70" height="35" rx="4" fill="#E8E0D5"/><ellipse cx="50" cy="50" rx="30" ry="8" fill="#F8F5F0"/><rect x="35" y="60" width="30" height="15" rx="2" fill="#2D2D2D"/><text x="50" y="72" text-anchor="middle" fill="#8B9A7D" font-size="10" font-weight="bold">0.0</text></svg>`,
+        dutch: `<svg viewBox="0 0 100 100" class="w-full h-full"><ellipse cx="50" cy="70" rx="35" ry="12" fill="#2D2D2D"/><rect x="15" y="40" width="70" height="30" fill="#2D2D2D"/><ellipse cx="50" cy="40" rx="35" ry="10" fill="#3D3D3D"/><ellipse cx="50" cy="30" rx="30" ry="8" fill="#2D2D2D"/><ellipse cx="50" cy="28" rx="28" ry="6" fill="#3D3D3D"/><circle cx="50" cy="28" r="5" fill="#B87333"/></svg>`,
+        bowl: `<svg viewBox="0 0 100 100" class="w-full h-full"><ellipse cx="50" cy="60" rx="38" ry="18" fill="#E8E0D5"/><path d="M12 55 Q12 75 50 75 Q88 75 88 55" fill="#C0C0C0"/><ellipse cx="50" cy="55" rx="38" ry="15" fill="#E8E0D5"/></svg>`,
+        blender: `<svg viewBox="0 0 100 100" class="w-full h-full"><path d="M30 20 L35 70 L65 70 L70 20 Z" fill="#F8F5F0" opacity="0.8"/><rect x="30" y="70" width="40" height="15" rx="2" fill="#2D2D2D"/><rect x="25" y="10" width="50" height="12" rx="3" fill="#2D2D2D"/><ellipse cx="50" cy="50" rx="10" ry="5" fill="#8B9A7D" opacity="0.5"/><circle cx="50" cy="77" r="3" fill="#B87333"/></svg>`,
+        tea: `<svg viewBox="0 0 100 100" class="w-full h-full"><ellipse cx="40" cy="65" rx="25" ry="12" fill="#8B9A7D"/><rect x="15" y="45" width="50" height="20" fill="#8B9A7D"/><ellipse cx="40" cy="45" rx="25" ry="10" fill="#9AAD8D"/><path d="M65 50 Q80 50 80 60 Q80 70 65 65" stroke="#8B9A7D" stroke-width="4" fill="none"/><ellipse cx="75" cy="35" rx="8" ry="12" fill="#B87333"/></svg>`,
+        pan: `<svg viewBox="0 0 100 100" class="w-full h-full"><ellipse cx="45" cy="55" rx="35" ry="15" fill="#2D2D2D"/><ellipse cx="45" cy="52" rx="30" ry="12" fill="#3D3D3D"/><rect x="75" y="48" width="20" height="8" rx="2" fill="#8B9A7D"/></svg>`,
+        kettle: `<svg viewBox="0 0 100 100" class="w-full h-full"><ellipse cx="45" cy="70" rx="30" ry="12" fill="#B87333"/><path d="M15 45 Q15 70 45 70 Q75 70 75 45" fill="#B87333"/><ellipse cx="45" cy="45" rx="30" ry="10" fill="#C98343"/><rect x="40" y="30" width="10" height="15" rx="2" fill="#2D2D2D"/><path d="M75 50 Q90 45 85 60" stroke="#B87333" stroke-width="6" fill="none"/></svg>`,
+        dinner: `<svg viewBox="0 0 100 100" class="w-full h-full"><ellipse cx="50" cy="50" rx="40" ry="18" fill="#F8F5F0"/><ellipse cx="50" cy="48" rx="35" ry="14" fill="#E8E0D5"/><ellipse cx="50" cy="46" rx="20" ry="8" fill="#F8F5F0"/><path d="M25 65 L25 85" stroke="#E8E0D5" stroke-width="3"/><path d="M75 65 L75 85" stroke="#E8E0D5" stroke-width="3"/></svg>`,
+        mat: `<svg viewBox="0 0 100 100" class="w-full h-full"><rect x="10" y="35" width="80" height="40" rx="2" fill="#B87333" opacity="0.8"/><rect x="15" y="40" width="70" height="30" rx="1" fill="#C98343" opacity="0.5"/><line x1="25" y1="40" x2="25" y2="70" stroke="#B87333" stroke-width="1" opacity="0.5"/><line x1="50" y1="40" x2="50" y2="70" stroke="#B87333" stroke-width="1" opacity="0.5"/><line x1="75" y1="40" x2="75" y2="70" stroke="#B87333" stroke-width="1" opacity="0.5"/></svg>`,
+        processor: `<svg viewBox="0 0 100 100" class="w-full h-full"><rect x="25" y="15" width="50" height="55" rx="4" fill="#F8F5F0" opacity="0.9"/><rect x="25" y="70" width="50" height="15" rx="2" fill="#2D2D2D"/><circle cx="50" cy="45" r="15" fill="#E8E0D5"/><path d="M40 45 L60 45 M50 35 L50 55" stroke="#8B9A7D" stroke-width="3"/><circle cx="40" cy="77" r="3" fill="#B87333"/><circle cx="50" cy="77" r="3" fill="#8B9A7D"/><circle cx="60" cy="77" r="3" fill="#B87333"/></svg>`,
+        shaker: `<svg viewBox="0 0 100 100" class="w-full h-full"><rect x="30" y="25" width="40" height="55" rx="3" fill="#C0C0C0"/><rect x="30" y="15" width="40" height="15" rx="2" fill="#2D2D2D"/><ellipse cx="50" cy="80" rx="18" ry="5" fill="#C0C0C0"/><rect x="35" y="35" width="30" height="35" rx="2" fill="#E8E0D5" opacity="0.3"/></svg>`,
+        plant: `<svg viewBox="0 0 100 100" class="w-full h-full"><rect x="25" y="50" width="50" height="35" rx="3" fill="#8B9A7D"/><rect x="30" y="55" width="40" height="25" fill="#6A7A5D"/><path d="M40 50 Q35 35 45 25" stroke="#4A6A3A" stroke-width="3" fill="none"/><path d="M50 50 Q50 30 50 20" stroke="#4A6A3A" stroke-width="3" fill="none"/><path d="M60 50 Q65 35 55 25" stroke="#4A6A3A" stroke-width="3" fill="none"/><ellipse cx="45" cy="25" rx="8" ry="5" fill="#8B9A7D"/><ellipse cx="50" cy="20" rx="6" ry="8" fill="#8B9A7D"/><ellipse cx="55" cy="25" rx="8" ry="5" fill="#8B9A7D"/></svg>`,
+        pressure: `<svg viewBox="0 0 100 100" class="w-full h-full"><ellipse cx="50" cy="70" rx="35" ry="12" fill="#C0C0C0"/><rect x="15" y="35" width="70" height="35" fill="#C0C0C0"/><ellipse cx="50" cy="35" rx="35" ry="10" fill="#D0D0D0"/><ellipse cx="50" cy="30" rx="20" ry="6" fill="#C0C0C0"/><circle cx="50" cy="28" r="8" fill="#2D2D2D"/><circle cx="50" cy="28" r="4" fill="#B87333"/><rect x="8" y="45" width="10" height="15" rx="2" fill="#2D2D2D"/><rect x="82" y="45" width="10" height="15" rx="2" fill="#2D2D2D"/></svg>`
+      };
+      return icons[iconType] || icons.pot;
+    }
+
+    // Render product card
+    function renderProductCard(product, isFeatured = false) {
+      const isInWishlist = wishlist.includes(product.id);
+      const discount = product.originalPrice ? Math.round((1 - product.price / product.originalPrice) * 100) : 0;
+      
+      return `
+        <div class="product-card group bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 ${isFeatured ? 'animate-fade-in-up' : ''}">
+          <div class="relative aspect-square bg-gradient-to-br from-brand-sand/50 to-brand-cream p-6 overflow-hidden">
+            <div class="product-image transition-transform duration-500 h-full flex items-center justify-center">
+              ${getProductIcon(product.icon)}
+            </div>
+            ${product.badge ? `<span class="absolute top-3 left-3 px-3 py-1 text-xs font-bold rounded-full ${product.badge === 'Sale' ? 'bg-red-500 text-white' : product.badge === 'New' ? 'bg-brand-sage text-white' : 'bg-brand-copper text-white'}">${product.badge}</span>` : ''}
+            ${discount > 0 ? `<span class="absolute top-3 right-3 px-2 py-1 text-xs font-bold bg-red-500 text-white rounded-full">-${discount}%</span>` : ''}
+            <button onclick="toggleWishlist(${product.id})" class="absolute top-3 ${discount > 0 ? 'right-14' : 'right-3'} w-9 h-9 bg-white rounded-full flex items-center justify-center shadow-md hover:bg-brand-copper hover:text-white transition-colors ${isInWishlist ? 'bg-brand-copper text-white' : ''}">
+              <i data-lucide="heart" class="w-4 h-4 ${isInWishlist ? 'fill-current' : ''}"></i>
+            </button>
+            <button onclick="addToCart(${product.id})" class="quick-add absolute bottom-3 left-3 right-3 py-2.5 bg-brand-charcoal text-white text-sm font-semibold rounded-lg opacity-0 transform translate-y-2 transition-all duration-300 hover:bg-brand-copper">
+              Add to Cart
+            </button>
+          </div>
+          <div class="p-4">
+            <div class="flex items-center gap-1 mb-2">
+              <i data-lucide="star" class="w-4 h-4 text-yellow-400 fill-yellow-400"></i>
+              <span class="text-sm font-medium">${product.rating}</span>
+              <span class="text-xs text-gray-400">(${product.reviews})</span>
+            </div>
+            <h4 onclick="viewProduct(${product.id})" class="font-semibold text-brand-charcoal mb-2 cursor-pointer hover:text-brand-copper transition-colors line-clamp-2">${product.name}</h4>
+            <div class="flex items-center gap-2">
+              <span class="text-lg font-bold text-brand-copper">AED ${product.price}</span>
+              ${product.originalPrice ? `<span class="text-sm text-gray-400 line-through">AED ${product.originalPrice}</span>` : ''}
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    // Render products
+    function renderProducts(container, productList, isFeatured = false) {
+      const el = document.getElementById(container);
+      if (el) {
+        el.innerHTML = productList.map(p => renderProductCard(p, isFeatured)).join('');
+        lucide.createIcons();
+      }
+    }
+
+    // Navigation
+    function navigateTo(page) {
+      const pages = ['home', 'shop', 'product', 'cart', 'wishlist', 'about'];
+      pages.forEach(p => {
+        const el = document.getElementById(`page-${p}`);
+        if (el) el.classList.add('hidden');
+      });
+      
+      const targetPage = document.getElementById(`page-${page}`);
+      if (targetPage) {
+        targetPage.classList.remove('hidden');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+
+      if (page === 'shop') {
+        renderProducts('shop-products', getFilteredProducts());
+        updateProductCount();
+      } else if (page === 'cart') {
+        renderCart();
+      } else if (page === 'wishlist') {
+        renderWishlist();
+      } else if (page === 'home') {
+        renderProducts('featured-products', products.slice(0, 8), true);
+      }
+    }
+
+    // Filter products
+    function filterByCategory(category) {
+      currentCategory = category;
+      navigateTo('shop');
+      
+      // Update category buttons
+      document.querySelectorAll('.category-btn').forEach(btn => {
+        if (btn.dataset.category === category) {
+          btn.classList.remove('bg-white', 'text-brand-charcoal', 'border', 'border-brand-sand');
+          btn.classList.add('bg-brand-charcoal', 'text-white');
+        } else {
+          btn.classList.add('bg-white', 'text-brand-charcoal', 'border', 'border-brand-sand');
+          btn.classList.remove('bg-brand-charcoal', 'text-white');
+        }
+      });
+
+      // Update title
+      const titles = {
+        all: 'All Products',
+        appliances: 'Kitchen Appliances',
+        accessories: 'Kitchen Accessories',
+        dining: 'Dining & Bar',
+        cookware: 'Cookware',
+        new: 'New Arrivals'
+      };
+      document.getElementById('shop-title').textContent = titles[category] || 'All Products';
+    }
+
+    function getFilteredProducts() {
+      let filtered = [...products];
+      
+      if (currentCategory !== 'all') {
+        if (currentCategory === 'new') {
+          filtered = filtered.filter(p => p.isNew);
+        } else {
+          filtered = filtered.filter(p => p.category === currentCategory);
+        }
+      }
+
+      // Sort
+      switch (currentSort) {
+        case 'price-low':
+          filtered.sort((a, b) => a.price - b.price);
+          break;
+        case 'price-high':
+          filtered.sort((a, b) => b.price - a.price);
+          break;
+        case 'newest':
+          filtered.sort((a, b) => b.isNew - a.isNew);
+          break;
+      }
+
+      return filtered;
+    }
+
+    function sortProducts(sortBy) {
+      currentSort = sortBy;
+      renderProducts('shop-products', getFilteredProducts());
+    }
+
+    function updateProductCount() {
+      const filtered = getFilteredProducts();
+      document.getElementById('product-count').textContent = `Showing ${filtered.length} products`;
+    }
+
+    // Search
+    function toggleSearch() {
+      const searchBar = document.getElementById('search-bar');
+      searchBar.classList.toggle('hidden');
+      if (!searchBar.classList.contains('hidden')) {
+        document.getElementById('search-input').focus();
+      }
+    }
+
+    function handleSearch(query) {
+      if (query.length > 2) {
+        const filtered = products.filter(p => 
+          p.name.toLowerCase().includes(query.toLowerCase())
+        );
+        navigateTo('shop');
+        renderProducts('shop-products', filtered);
+        document.getElementById('shop-title').textContent = `Search: "${query}"`;
+        document.getElementById('product-count').textContent = `Found ${filtered.length} products`;
+      }
+    }
+
+    // Mobile menu
+    function toggleMobileMenu() {
+      document.getElementById('mobile-menu').classList.toggle('hidden');
+    }
+
+    // Cart functions
+    function addToCart(productId) {
+      const existing = cart.find(item => item.id === productId);
+      if (existing) {
+        existing.quantity++;
+      } else {
+        cart.push({ id: productId, quantity: 1 });
+      }
+      updateCartCount();
+      showToast('Added to cart!');
+    }
+
+    function removeFromCart(productId) {
+      cart = cart.filter(item => item.id !== productId);
+      updateCartCount();
+      renderCart();
+    }
+
+    function updateCartQuantity(productId, delta) {
+      const item = cart.find(i => i.id === productId);
+      if (item) {
+        item.quantity += delta;
+        if (item.quantity <= 0) {
+          removeFromCart(productId);
+        } else {
+          renderCart();
+        }
+      }
+    }
+
+    function updateCartCount() {
+      const count = cart.reduce((sum, item) => sum + item.quantity, 0);
+      document.getElementById('cart-count').textContent = count;
+    }
+
+    function renderCart() {
+      const container = document.getElementById('cart-content');
+      
+      if (cart.length === 0) {
+        container.innerHTML = `
+          <div class="text-center py-16">
+            <div class="w-24 h-24 mx-auto mb-6 bg-brand-sand rounded-full flex items-center justify-center">
+              <i data-lucide="shopping-bag" class="w-12 h-12 text-gray-400"></i>
+            </div>
+            <h3 class="text-xl font-semibold text-brand-charcoal mb-2">Your cart is empty</h3>
+            <p class="text-gray-500 mb-6">Looks like you haven't added anything yet.</p>
+            <button onclick="navigateTo('shop')" class="px-6 py-3 bg-brand-copper text-white font-semibold rounded-lg hover:bg-brand-copper/90 transition-colors">
+              Start Shopping
+            </button>
+          </div>
+        `;
+        lucide.createIcons();
+        return;
+      }
+
+      const cartItems = cart.map(item => {
+        const product = products.find(p => p.id === item.id);
+        return { ...product, quantity: item.quantity };
+      });
+
+      const subtotal = cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
+      const shipping = subtotal >= 200 ? 0 : 25;
+      const total = subtotal + shipping;
+
+      container.innerHTML = `
+        <div class="space-y-4 mb-8">
+          ${cartItems.map(item => `
+            <div class="flex gap-4 bg-white p-4 rounded-xl shadow-sm">
+              <div class="w-24 h-24 bg-brand-sand rounded-lg flex items-center justify-center flex-shrink-0 p-2">
+                ${getProductIcon(item.icon)}
+              </div>
+              <div class="flex-1">
+                <h4 class="font-semibold text-brand-charcoal mb-1">${item.name}</h4>
+                <p class="text-brand-copper font-bold">AED ${item.price}</p>
+                <div class="flex items-center gap-3 mt-2">
+                  <button onclick="updateCartQuantity(${item.id}, -1)" class="w-8 h-8 bg-brand-sand rounded-full flex items-center justify-center hover:bg-brand-copper hover:text-white transition-colors">
+                    <i data-lucide="minus" class="w-4 h-4"></i>
+                  </button>
+                  <span class="font-semibold">${item.quantity}</span>
+                  <button onclick="updateCartQuantity(${item.id}, 1)" class="w-8 h-8 bg-brand-sand rounded-full flex items-center justify-center hover:bg-brand-copper hover:text-white transition-colors">
+                    <i data-lucide="plus" class="w-4 h-4"></i>
+                  </button>
+                </div>
+              </div>
+              <button onclick="removeFromCart(${item.id})" class="text-gray-400 hover:text-red-500 transition-colors">
+                <i data-lucide="trash-2" class="w-5 h-5"></i>
+              </button>
+            </div>
+          `).join('')}
+        </div>
+        <div class="bg-white rounded-xl p-6 shadow-sm">
+          <h3 class="font-semibold text-brand-charcoal mb-4">Order Summary</h3>
+          <div class="space-y-2 mb-4">
+            <div class="flex justify-between text-gray-600">
+              <span>Subtotal</span>
+              <span>AED ${subtotal}</span>
+            </div>
+            <div class="flex justify-between text-gray-600">
+              <span>Shipping</span>
+              <span>${shipping === 0 ? 'FREE' : `AED ${shipping}`}</span>
+            </div>
+            ${shipping > 0 ? `<p class="text-xs text-brand-copper">Add AED ${200 - subtotal} more for free shipping!</p>` : ''}
+          </div>
+          <div class="border-t border-brand-sand pt-4 mb-6">
+            <div class="flex justify-between text-lg font-bold text-brand-charcoal">
+              <span>Total</span>
+              <span>AED ${total}</span>
+            </div>
+          </div>
+          <button onclick="showToast('Checkout coming soon!')" class="w-full py-4 bg-brand-charcoal text-white font-semibold rounded-lg hover:bg-brand-copper transition-colors">
+            Proceed to Checkout
+          </button>
+        </div>
+      `;
+      lucide.createIcons();
+    }
+
+    // Wishlist functions
+    function toggleWishlist(productId) {
+      const index = wishlist.indexOf(productId);
+      if (index > -1) {
+        wishlist.splice(index, 1);
+        showToast('Removed from wishlist');
+      } else {
+        wishlist.push(productId);
+        showToast('Added to wishlist!');
+      }
+      updateWishlistCount();
+      
+      // Re-render current view
+      const currentPage = document.querySelector('[id^="page-"]:not(.hidden)');
+      if (currentPage) {
+        if (currentPage.id === 'page-home') {
+          renderProducts('featured-products', products.slice(0, 8), true);
+        } else if (currentPage.id === 'page-shop') {
+          renderProducts('shop-products', getFilteredProducts());
+        } else if (currentPage.id === 'page-wishlist') {
+          renderWishlist();
+        }
+      }
+    }
+
+    function updateWishlistCount() {
+      const countEl = document.getElementById('wishlist-count');
+      if (wishlist.length > 0) {
+        countEl.textContent = wishlist.length;
+        countEl.classList.remove('hidden');
+      } else {
+        countEl.classList.add('hidden');
+      }
+    }
+
+    function renderWishlist() {
+      const container = document.getElementById('wishlist-content');
+      
+      if (wishlist.length === 0) {
+        container.innerHTML = `
+          <div class="text-center py-16">
+            <div class="w-24 h-24 mx-auto mb-6 bg-brand-sand rounded-full flex items-center justify-center">
+              <i data-lucide="heart" class="w-12 h-12 text-gray-400"></i>
+            </div>
+            <h3 class="text-xl font-semibold text-brand-charcoal mb-2">Your wishlist is empty</h3>
+            <p class="text-gray-500 mb-6">Save items you love for later.</p>
+            <button onclick="navigateTo('shop')" class="px-6 py-3 bg-brand-copper text-white font-semibold rounded-lg hover:bg-brand-copper/90 transition-colors">
+              Browse Products
+            </button>
+          </div>
+        `;
+        lucide.createIcons();
+        return;
+      }
+
+      const wishlistProducts = products.filter(p => wishlist.includes(p.id));
+      container.innerHTML = `
+        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+          ${wishlistProducts.map(p => renderProductCard(p)).join('')}
+        </div>
+      `;
+      lucide.createIcons();
+    }
+
+    // Product detail
+    function viewProduct(productId) {
+      currentProductId = productId;
+      const product = products.find(p => p.id === productId);
+      if (!product) return;
+
+      const container = document.getElementById('product-detail-content');
+      const isInWishlist = wishlist.includes(product.id);
+
+      container.innerHTML = `
+        <div class="grid md:grid-cols-2 gap-12">
+          <div class="bg-gradient-to-br from-brand-sand/50 to-brand-cream rounded-2xl p-12 flex items-center justify-center">
+            <div class="w-64 h-64">
+              ${getProductIcon(product.icon)}
+            </div>
+          </div>
+          <div>
+            ${product.badge ? `<span class="inline-block px-3 py-1 text-xs font-bold rounded-full bg-brand-copper text-white mb-4">${product.badge}</span>` : ''}
+            <h1 class="text-3xl font-display font-bold text-brand-charcoal mb-4">${product.name}</h1>
+            <div class="flex items-center gap-4 mb-6">
+              <div class="flex items-center gap-1">
+                <i data-lucide="star" class="w-5 h-5 text-yellow-400 fill-yellow-400"></i>
+                <span class="font-semibold">${product.rating}</span>
+                <span class="text-gray-500">(${product.reviews} reviews)</span>
+              </div>
+              <span class="text-gray-300">|</span>
+              <span class="text-brand-sage font-medium">In Stock</span>
+            </div>
+            <div class="flex items-center gap-4 mb-6">
+              <span class="text-3xl font-bold text-brand-copper">AED ${product.price}</span>
+              ${product.originalPrice ? `<span class="text-xl text-gray-400 line-through">AED ${product.originalPrice}</span>` : ''}
+            </div>
+            <p class="text-gray-600 mb-8">Premium quality ${product.name.toLowerCase()} designed for the modern kitchen. Perfect for everyday cooking and entertaining guests. Made with high-quality materials for lasting durability.</p>
+            <div class="flex gap-4 mb-8">
+              <button onclick="addToCart(${product.id})" class="flex-1 py-4 bg-brand-charcoal text-white font-semibold rounded-lg hover:bg-brand-copper transition-colors flex items-center justify-center gap-2">
+                <i data-lucide="shopping-bag" class="w-5 h-5"></i>
+                Add to Cart
+              </button>
+              <button onclick="toggleWishlist(${product.id})" class="w-14 h-14 border-2 border-brand-sand rounded-lg flex items-center justify-center hover:border-brand-copper transition-colors ${isInWishlist ? 'bg-brand-copper border-brand-copper text-white' : ''}">
+                <i data-lucide="heart" class="w-6 h-6 ${isInWishlist ? 'fill-current' : ''}"></i>
+              </button>
+            </div>
+            <div class="space-y-3 text-sm">
+              <div class="flex items-center gap-3 text-gray-600">
+                <i data-lucide="truck" class="w-5 h-5 text-brand-copper"></i>
+                <span>Free delivery on orders over AED 200</span>
+              </div>
+              <div class="flex items-center gap-3 text-gray-600">
+                <i data-lucide="refresh-cw" class="w-5 h-5 text-brand-copper"></i>
+                <span>30-day easy returns</span>
+              </div>
+              <div class="flex items-center gap-3 text-gray-600">
+                <i data-lucide="shield-check" class="w-5 h-5 text-brand-copper"></i>
+                <span>1 year warranty included</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      `;
+
+      navigateTo('product');
+      lucide.createIcons();
+    }
+
+    // Toast notification
+    function showToast(message) {
+      const toast = document.getElementById('toast');
+      const toastMessage = document.getElementById('toast-message');
+      toastMessage.textContent = message;
+      toast.classList.remove('translate-y-20', 'opacity-0');
+      
+      setTimeout(() => {
+        toast.classList.add('translate-y-20', 'opacity-0');
+      }, 2500);
+    }
+
+    // Countdown timer
+    function updateCountdown() {
+      const now = new Date();
+      const endDate = new Date(now.getTime() + 3 * 24 * 60 * 60 * 1000 + 12 * 60 * 60 * 1000 + 45 * 60 * 1000);
+      const diff = endDate - now;
+
+      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const mins = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+      const secs = Math.floor((diff % (1000 * 60)) / 1000);
+
+      document.getElementById('countdown-days').textContent = String(days).padStart(2, '0');
+      document.getElementById('countdown-hours').textContent = String(hours).padStart(2, '0');
+      document.getElementById('countdown-mins').textContent = String(mins).padStart(2, '0');
+      document.getElementById('countdown-secs').textContent = String(secs).padStart(2, '0');
+    }
+
+    // Element SDK integration
+    async function onConfigChange(config) {
+      const storeName = config.store_name || defaultConfig.store_name;
+      const tagline = config.tagline || defaultConfig.tagline;
+      const heroTitle = config.hero_title || defaultConfig.hero_title;
+      const heroSubtitle = config.hero_subtitle || defaultConfig.hero_subtitle;
+      const promoText = config.promo_text || defaultConfig.promo_text;
+      const bgColor = config.background_color || defaultConfig.background_color;
+      const surfaceColor = config.surface_color || defaultConfig.surface_color;
+      const textColor = config.text_color || defaultConfig.text_color;
+      const primaryAction = config.primary_action_color || defaultConfig.primary_action_color;
+      const secondaryAction = config.secondary_action_color || defaultConfig.secondary_action_color;
+      const fontFamily = config.font_family || defaultConfig.font_family;
+      const fontSize = config.font_size || defaultConfig.font_size;
+
+      document.getElementById('store-name').textContent = storeName;
+      document.getElementById('tagline').textContent = tagline;
+      document.getElementById('promo-text').textContent = promoText;
+
+      const heroTitleEl = document.getElementById('hero-title');
+      if (heroTitleEl) {
+        heroTitleEl.innerHTML = heroTitle.replace(/\n/g, '<br>').replace('Culinary Space', '<span class="text-brand-copper">Culinary Space</span>');
+      }
+
+      const heroSubtitleEl = document.getElementById('hero-subtitle');
+      if (heroSubtitleEl) heroSubtitleEl.textContent = heroSubtitle;
+
+      // Apply colors
+      document.documentElement.style.setProperty('--bg-color', bgColor);
+      document.documentElement.style.setProperty('--surface-color', surfaceColor);
+      document.documentElement.style.setProperty('--text-color', textColor);
+      document.documentElement.style.setProperty('--primary-action', primaryAction);
+      document.documentElement.style.setProperty('--secondary-action', secondaryAction);
+
+      // Apply font
+      document.body.style.fontFamily = `${fontFamily}, Plus Jakarta Sans, sans-serif`;
+      document.body.style.fontSize = `${fontSize}px`;
+    }
+
+    // Initialize
+    if (window.elementSdk) {
+      window.elementSdk.init({
+        defaultConfig,
+        onConfigChange,
+        mapToCapabilities: (config) => ({
+          recolorables: [
+            {
+              get: () => config.background_color || defaultConfig.background_color,
+              set: (v) => { config.background_color = v; window.elementSdk.setConfig({ background_color: v }); }
+            },
+            {
+              get: () => config.surface_color || defaultConfig.surface_color,
+              set: (v) => { config.surface_color = v; window.elementSdk.setConfig({ surface_color: v }); }
+            },
+            {
+              get: () => config.text_color || defaultConfig.text_color,
+              set: (v) => { config.text_color = v; window.elementSdk.setConfig({ text_color: v }); }
+            },
+            {
+              get: () => config.primary_action_color || defaultConfig.primary_action_color,
+              set: (v) => { config.primary_action_color = v; window.elementSdk.setConfig({ primary_action_color: v }); }
+            },
+            {
+              get: () => config.secondary_action_color || defaultConfig.secondary_action_color,
+              set: (v) => { config.secondary_action_color = v; window.elementSdk.setConfig({ secondary_action_color: v }); }
+            }
+          ],
+          borderables: [],
+          fontEditable: {
+            get: () => config.font_family || defaultConfig.font_family,
+            set: (v) => { config.font_family = v; window.elementSdk.setConfig({ font_family: v }); }
+          },
+          fontSizeable: {
+            get: () => config.font_size || defaultConfig.font_size,
+            set: (v) => { config.font_size = v; window.elementSdk.setConfig({ font_size: v }); }
+          }
+        }),
+        mapToEditPanelValues: (config) => new Map([
+          ['store_name', config.store_name || defaultConfig.store_name],
+          ['tagline', config.tagline || defaultConfig.tagline],
+          ['hero_title', config.hero_title || defaultConfig.hero_title],
+          ['hero_subtitle', config.hero_subtitle || defaultConfig.hero_subtitle],
+          ['promo_text', config.promo_text || defaultConfig.promo_text]
+        ])
+      });
+    }
+
+    // Initial render
+    renderProducts('featured-products', products.slice(0, 8), true);
+    lucide.createIcons();
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
+  </script>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9d83dc7da3d221f5',t:'MTc3MjgyNjMzMi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
