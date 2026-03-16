@@ -1,0 +1,62 @@
+<!-- Header section -->
+<header class="bg-brand-cream/95 backdrop-blur-md sticky top-0 z-50 border-b border-brand-sand">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex items-center justify-between h-20">
+      <div class="flex items-center gap-3 cursor-pointer" onclick="navigateTo && navigateTo('home')">
+        <div class="relative w-12 h-12">
+          <svg viewBox="0 0 48 48" class="w-full h-full"><rect x="8" y="16" width="32" height="24" rx="2" fill="#B87333" opacity="0.9" /></svg>
+        </div>
+        <div>
+          <h1 id="store-name" class="text-2xl font-display font-bold text-brand-charcoal tracking-tight">{{ shop.name | default: 'UrbanNest' }}</h1>
+          <p id="tagline" class="text-xs text-brand-copper font-medium tracking-widest uppercase">Kitchen &amp; Dining</p>
+        </div>
+      </div>
+
+      <nav class="hidden lg:flex items-center gap-8">
+        <a href="#" onclick="navigateTo && navigateTo('home'); return false;" class="nav-link relative text-sm font-semibold text-brand-charcoal hover:text-brand-copper transition-colors">Home</a>
+        <a href="#" onclick="navigateTo && navigateTo('shop'); return false;" class="nav-link relative text-sm font-semibold text-brand-charcoal hover:text-brand-copper transition-colors">Shop All</a>
+        <a href="#" onclick="filterByCategory && filterByCategory('appliances'); return false;" class="nav-link relative text-sm font-semibold text-brand-charcoal hover:text-brand-copper transition-colors">Appliances</a>
+        <a href="#" onclick="filterByCategory && filterByCategory('accessories'); return false;" class="nav-link relative text-sm font-semibold text-brand-charcoal hover:text-brand-copper transition-colors">Accessories</a>
+        <a href="#" onclick="filterByCategory && filterByCategory('dining'); return false;" class="nav-link relative text-sm font-semibold text-brand-charcoal hover:text-brand-copper transition-colors">Dining &amp; Bar</a>
+        <a href="#" onclick="navigateTo && navigateTo('about'); return false;" class="nav-link relative text-sm font-semibold text-brand-charcoal hover:text-brand-copper transition-colors">About</a>
+      </nav>
+
+      <div class="flex items-center gap-4">
+        <button onclick="toggleSearch && toggleSearch()" class="p-2 hover:bg-brand-sand rounded-full transition-colors">
+          <i data-lucide="search" class="w-5 h-5"></i>
+        </button>
+        <button onclick="navigateTo && navigateTo('wishlist')" class="p-2 hover:bg-brand-sand rounded-full transition-colors relative">
+          <i data-lucide="heart" class="w-5 h-5"></i>
+          <span id="wishlist-count" class="absolute -top-1 -right-1 w-5 h-5 bg-brand-copper text-white text-xs rounded-full flex items-center justify-center font-bold hidden">0</span>
+        </button>
+        <button onclick="navigateTo && navigateTo('cart')" class="p-2 hover:bg-brand-sand rounded-full transition-colors relative">
+          <i data-lucide="shopping-bag" class="w-5 h-5"></i>
+          <span id="cart-count" class="absolute -top-1 -right-1 w-5 h-5 bg-brand-copper text-white text-xs rounded-full flex items-center justify-center font-bold">0</span>
+        </button>
+        <button onclick="toggleMobileMenu && toggleMobileMenu()" class="lg:hidden p-2 hover:bg-brand-sand rounded-full transition-colors">
+          <i data-lucide="menu" class="w-5 h-5"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div id="search-bar" class="hidden border-t border-brand-sand">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+      <div class="relative">
+        <input type="text" id="search-input" placeholder="Search for kitchen essentials..." class="w-full px-4 py-3 pl-12 bg-white border border-brand-sand rounded-lg focus:outline-none focus:border-brand-copper transition-colors" oninput="handleSearch && handleSearch(this.value)">
+        <i data-lucide="search" class="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400"></i>
+      </div>
+    </div>
+  </div>
+
+  <div id="mobile-menu" class="hidden lg:hidden border-t border-brand-sand bg-brand-cream">
+    <nav class="max-w-7xl mx-auto px-4 py-4 space-y-3">
+      <a href="#" onclick="navigateTo && navigateTo('home'); toggleMobileMenu && toggleMobileMenu(); return false;" class="block py-2 text-brand-charcoal font-medium">Home</a>
+      <a href="#" onclick="navigateTo && navigateTo('shop'); toggleMobileMenu && toggleMobileMenu(); return false;" class="block py-2 text-brand-charcoal font-medium">Shop All</a>
+      <a href="#" onclick="filterByCategory && (filterByCategory('appliances'), toggleMobileMenu && toggleMobileMenu()); return false;" class="block py-2 text-brand-charcoal font-medium">Appliances</a>
+      <a href="#" onclick="filterByCategory && (filterByCategory('accessories'), toggleMobileMenu && toggleMobileMenu()); return false;" class="block py-2 text-brand-charcoal font-medium">Accessories</a>
+      <a href="#" onclick="filterByCategory && (filterByCategory('dining'), toggleMobileMenu && toggleMobileMenu()); return false;" class="block py-2 text-brand-charcoal font-medium">Dining &amp; Bar</a>
+      <a href="#" onclick="navigateTo && (navigateTo('about'), toggleMobileMenu && toggleMobileMenu()); return false;" class="block py-2 text-brand-charcoal font-medium">About</a>
+    </nav>
+  </div>
+</header>

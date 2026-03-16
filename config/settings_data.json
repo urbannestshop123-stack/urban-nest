@@ -1,0 +1,12 @@
+{
+  "current": "default",
+  "presets": {
+    "default": {
+      "name": "Default",
+      "settings": {
+        "store_name": "UrbanNest",
+        "promo_text": "🎉 FREE DELIVERY on orders over AED 200 | Use code: URBAN20 for 20% OFF"
+      }
+    }
+  }
+}
